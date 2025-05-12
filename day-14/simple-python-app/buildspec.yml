@@ -11,19 +11,19 @@ phases:
     runtime-versions:
       python: 3.11
 
- pre_build:
-  commands:
-    - echo "Installing Python dependencies..."
-    - echo "Listing files to confirm path..."
-    - ls -R ..
-    - pip install -r ../day-13/simple-python-app/requirements.txt
-    - echo "Logging in to Amazon ECR..."
-    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 495599757751.dkr.ecr.us-east-1.amazonaws.com
+  pre_build:
+    commands:
+      - echo "Installing Python dependencies..."
+      - echo "Listing files to confirm path..."
+      - ls -R ..
+      - pip install -r ../day-13/simple-python-app/requirements.txt
+      - echo "Logging in to Amazon ECR..."
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 495599757751.dkr.ecr.us-east-1.amazonaws.com
 
   build:
     commands:
       - echo "Building Docker image..."
-      - cd day-13/simple-python-app/
+      - cd ../day-13/simple-python-app/
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG 495599757751.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
 
@@ -36,4 +36,4 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: day-13/simple-python-app
+  base-directory: ../day-13/simple-python-app
