@@ -1,15 +1,15 @@
 #!/bin/bash
 set -e
 
-PORT=5000
+CONTAINER_NAME="admin-container"
 
-echo "Looking for containers using port $PORT..."
-CONTAINER_ID=$(docker ps --filter "publish=0.0.0.0:$PORT" --format "{{.ID}}")
+# Find container using the port (5000)
+EXISTING_CONTAINER_ID=$(docker ps -q --filter "publish=5000")
 
-if [ -n "$CONTAINER_ID" ]; then
-    echo "Stopping container using port $PORT: $CONTAINER_ID"
-    docker stop $CONTAINER_ID
-    docker rm $CONTAINER_ID
+if [ -n "$EXISTING_CONTAINER_ID" ]; then
+    echo "Stopping container using port 5000 (ID: $EXISTING_CONTAINER_ID)..."
+    docker stop $EXISTING_CONTAINER_ID
+    docker rm $EXISTING_CONTAINER_ID
 else
-    echo "No container is using port $PORT"
+    echo "No container found using port 5000."
 fi
