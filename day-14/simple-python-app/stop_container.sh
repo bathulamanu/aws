@@ -3,7 +3,6 @@ set -e
 
 echo "Checking for any container using port 5000..."
 
-# Find container ID using port 5000
 CONTAINER_ID=$(docker ps --filter "publish=5000" --format "{{.ID}}")
 
 if [ -n "$CONTAINER_ID" ]; then
