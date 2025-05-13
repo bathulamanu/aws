@@ -34,3 +34,4 @@ docker rm $NEW_CONTAINER
 docker run -d --name $OLD_CONTAINER -p $PORT_OLD:5000 $IMAGE
 
 echo "Deployment complete with zero-downtime!"
+
